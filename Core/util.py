@@ -107,7 +107,7 @@ def open_image(image_file):
             else:
                 os.system("eog " + image_file)  # for Linux
         else:
-            os.system("open " + image_file)  # for Mac
+            os.system("open " + './Static/img/' + image_file)  # for Mac
 
 
 def save_image(resp, image_file):

@@ -55,7 +55,6 @@ def jdShopper(request):
         glo.thread = Thread(target=glo.waiter.waitTimeForSell)
         glo.thread.start()
     glo.update()
-    print(glo.login)
     return glo.login
 
 def loginStatus(request):

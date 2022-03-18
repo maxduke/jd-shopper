@@ -247,8 +247,3 @@ def translate_path(path):
             continue
         path = os.path.join(path, word)
     return path
-
-
-def signal_handler(signal, frame):
-    print("You choose to stop me.")
-    exit()

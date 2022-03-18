@@ -1,12 +1,10 @@
-#!/usr/bin/env python
-# -*- encoding=utf8 -*-
 import datetime
 import json
 
 import requests
 
-from Logger.logger import logger
-from Config.settings import config
+from Logger import logger
+from Config import config
 
 
 class Messenger(object):
@@ -39,11 +37,3 @@ class Messenger(object):
             logger.error('Request error: %s', req_error)
         except Exception as e:
             logger.error('Fail to send message [text: %s, desp: %s]: %s', text, desp, e)
-
-
-sckey = config.settings("Message", "sckey")
-message = Messenger(sckey)
-
-
-def sendMessage(mes):
-    message.send(mes)

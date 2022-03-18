@@ -1,5 +1,5 @@
 import copy
-from Config.settings import config
+from Config import config
 from Core.spider import Waiter
 from threading import Thread
 class Global(object):
@@ -15,8 +15,8 @@ class Global(object):
 glo = Global()
 
 def log(request):
-    file_path = config.path() + config.settings("Logger", "FILE_PATH") + \
-        config.settings("Logger", "FILE_NAME")
+    file_path = config.path + config.Logger.file_path + \
+        config.Logger.file_name
     file_page_file = open(file_path, 'r', encoding="utf-8")
     return str(file_page_file.read())
 

@@ -5,8 +5,8 @@ import functools
 import json
 import os
 import pickle
-from Logger.logger import logger
-from Config.settings import config
+from Logger import logger
+from Config import config
 from Core.exception import SKException
 from Core.util import (
     parse_json,
@@ -21,7 +21,7 @@ class SpiderSession:
     """
     def __init__(self):
         self.cookies_dir_path = "./cookies/"
-        self.user_agent = config.settings('Spider', 'DEFAULT_USER_AGENT')
+        self.user_agent = config.Spider.user_agent
 
         self.session = self._init_session()
 

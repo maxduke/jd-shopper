@@ -7,33 +7,29 @@ import json
 import random
 import sys
 from concurrent.futures import ProcessPoolExecutor
-from Core.exception import SKException
 from bs4 import BeautifulSoup
-from Config.settings import config
-from Logger.logger import logger
-from Core.login import SpiderSession, QrLogin
-from Message.message import sendMessage
+from Config import config
+from Logger import logger
+from Message import sendMessage
 from Core.timer import Timer
 from Core.util import get_random_useragent, parse_json
+from Core.exception import SKException
+from Core.login import SpiderSession, QrLogin
 
 
 class Waiter():
     def __init__(self,
-                 skuids=config.settings("Spider", "sku_id"),
-                 area=config.settings("Spider", "area"),
-                 eid=config.settings("Spider", "eid"),
-                 fp=config.settings("Spider", "fp"),
-                 count=config.settings("Spider", "amount"),
-                 payment_pwd=config.settings(
-                     "Account", "payment_pwd"),
-                 retry=config.settings("Spider", "retry"),
-                 work_count=config.settings(
-                     'Spider', 'work_count'),
-                 random_time=config.settings(
-                     'Spider', 'random_time'),
-                 timeout=float(config.raw(
-                     "Spider", "timeout")),
-                 date=config.settings('Spider', 'buy_time').__str__()
+                 skuids=config.Spider.sku_id,
+                 area=config.Spider.area,
+                 eid=config.Spider.eid,
+                 fp=config.Spider.fp,
+                 count=config.Spider.amount,
+                 payment_pwd=config.Account.payment_pwd,
+                 retry=config.Spider.retry,
+                 work_count=config.Spider.work_count,
+                 random_time=config.Spider.random_time,
+                 timeout=float(config.Spider.timeout),
+                 date=config.Spider.buy_time.__str__()
                  ):
 
         self.skuids = skuids
@@ -145,7 +141,7 @@ class Waiter():
 
     def response_status(self, resp):
         if resp.status_code != requests.codes.OK:
-            print('Status: %u, Url: %s' % (resp.status_code, resp.url))
+            logger.info('Status: %u, Url: %s' % (resp.status_code, resp.url))
             return False
         return True
 
@@ -191,10 +187,10 @@ class Waiter():
         jsparser = json.loads(resp.text)
         # 33 有货 34 无货
         if jsparser['StockState'] == 33 and jsparser['StockStateName'] == '现货':
-            print('库存状态：', jsparser['StockStateName'])
+            logger.info('库存状态：', jsparser['StockStateName'])
             return True
         else:
-            print('库存状态：{}(无现货)'.format(jsparser['StockStateName']))
+            logger.info('库存状态：{}(无现货)'.format(jsparser['StockStateName']))
             return False
 
     def _waitForSell(self):
@@ -250,6 +246,7 @@ class Waiter():
             resp_json = parse_json(resp_text)
             stock_info = resp_json.get(sku_id)
             sku_state = stock_info.get('skuState')  # 商品是否上架
+            print(stock_info)
             # 商品库存状态：33 -- 现货  0,34 -- 无货  36 -- 采购中  40 -- 可配货
             stock_state = stock_info.get('StockState')
             if sku_state == 1 and stock_state in (33, 40):
@@ -281,7 +278,7 @@ class Waiter():
         }
         resp = self.session.post(url, data=data)
         if resp.status_code != requests.codes.OK:
-            print('Status: %u, Url: %s' % (resp.status_code, resp.url))
+            logger.info('Status: %u, Url: %s' % (resp.status_code, resp.url))
             return False
         return True
 
@@ -298,7 +295,7 @@ class Waiter():
         }
         resp = self.session.post(url, data=data)
         if resp.status_code != requests.codes.OK:
-            print('Status: %u, Url: %s' % (resp.status_code, resp.url))
+            logger.info('Status: %u, Url: %s' % (resp.status_code, resp.url))
             return False
         return True
 
@@ -329,7 +326,7 @@ class Waiter():
         resp = self.session.post(url, data=data, headers=headers)
         logger.info('清空购物车')
         if resp.status_code != requests.codes.OK:
-            print('Status: %u, Url: %s' % (resp.status_code, resp.url))
+            logger.info('Status: %u, Url: %s' % (resp.status_code, resp.url))
             return False
         return True
 
@@ -455,7 +452,7 @@ class Waiter():
             'Host': 'trade.jd.com',
         }
         try:
-            # print(url)
+            # logger.info(url)
             resp = self.session.get(url=url, params=payload, headers=headers)
             if "刷新太频繁了" in resp.text:
                 logger.error("刷新太频繁了 url: {}".format(url))
@@ -466,7 +463,7 @@ class Waiter():
                 return ''
 
             soup = BeautifulSoup(resp.text, "html.parser")
-            # print(soup.title)
+            # logger.info(soup.title)
             risk_control = self.get_tag_value(
                 soup.select('input#riskControl'), 'value')
 
@@ -628,24 +625,24 @@ class Waiter():
     def check_stock(self):
         st_tmp = []
         len_arg = 70
-        # print("skustr:",skuidStr)
-        # print("skuids:",len(skuids))
+        # logger.info("skustr:",skuidStr)
+        # logger.info("skuids:",len(skuids))
         skuid_nums = len(self.skuids)
         skuid_batchs = math.ceil(skuid_nums / len_arg)
-        # print("skuid_batchs:",skuid_batchs)
+        # logger.info("skuid_batchs:",skuid_batchs)
         if (skuid_batchs > 1):
             for i in range(0, skuid_batchs):
                 if (len_arg * (i + 1) <= len(self.skuids)):
-                    # print("取个数：",len_arg*i,"至",len_arg*(i+1))
+                    # logger.info("取个数：",len_arg*i,"至",len_arg*(i+1))
                     skuidStr = ','.join(
                         self.skuids[len_arg * i:len_arg * (i + 1)])
                     st_tmp += self.check_stock_tmp(skuidStr,
                                                    self.skuids[len_arg * i:len_arg * (i + 1)])
                 else:
-                    # print("取个数：",len_arg*i,"至",len_arg*(i+1))
+                    # logger.info("取个数：",len_arg*i,"至",len_arg*(i+1))
                     skuidStr = ','.join(
                         self.skuids[len_arg * i:skuid_nums])  # skuid配置的最后一段
-                    # print(skuidStr)
+                    # logger.info(skuidStr)
                     st_tmp += self.check_stock_tmp(skuidStr,
                                                    self.skuids[len_arg * i:skuid_nums])
         else:
@@ -675,14 +672,14 @@ class Waiter():
         respjson = json.loads(resptext)
         inStockSkuid = []
         nohasSkuid = []
-        # print(resptext,respjson)
+        # logger.info(resptext,respjson)
         for i in skuids_a:
-            # print("当前处理：",i)
+            # logger.info("当前处理：",i)
             if (respjson[i]['StockStateName'] != '无货'):
                 inStockSkuid.append(i)
             else:
                 nohasSkuid.append(i)
-        # print(nohasSkuid)
+        # logger.info(nohasSkuid)
         logger.info('[%s]无货', ','.join(nohasSkuid))
         return inStockSkuid
 

@@ -4,8 +4,8 @@ import requests
 import json
 
 from datetime import datetime
-from Logger.logger import logger
-from Config.settings import config
+from Logger import logger
+from Config import config
 
 
 class Timer(object):

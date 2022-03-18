@@ -112,7 +112,7 @@ Tips:
 
 1. Recommended **Chrome** browser
 2. Go to the */TEST/area_id/* directory to query the area ID of your location
-3. If your account has **Jingdoujing coupon balance**, please go to */Config/config.ini* to set the password, or run with another account
+3. If your account has **Jingdoujing coupon balance**, please go to */Config/config.yaml* to set the password, or run with another account
 4. Run the service from the command line
 
 ```shell
@@ -133,7 +133,7 @@ python3 runserver.py
 
 #### 2. Web page scan code login, or account password login
 
-#### 3. Fill in the config.ini configuration information
+#### 3. Fill in the config.yaml configuration information
 
 (1) `eid` and `fp` find a common product and place an order casually, and then grab the package to see, these two values ​​can be filled in fixed
 > Find any product to place an order, then go to the settlement page, open the browser's debug window, switch to the console Tab page, and enter the variable `_JdTdudfp` in the console, you can get `eid` and `fp from the output Json `.  
@@ -159,12 +159,12 @@ All of the above are required.
 
 (4) Modify the number of snapped purchases
 > The default number of snaps in the code is 2
-> The specific modification is: in the config.ini file
+> The specific modification is: in the config.yaml file
 
 (5) **Special reminder! ** *More than one person is stuck on this issue, spend at least 2 hours debug if not careful*
 > If you have Jing Coupon available in your account (note that it is not an East Coupon) or used Jingdou in your last purchase order,
 > Then JD.com may automatically select JD.com payment or automatically check JD.com payment when placing an order.
-> At this time, placing an order will require you to enter a six-digit payment password. Please configure your payment password in config.ini, such as 123456.
+> At this time, placing an order will require you to enter a six-digit payment password. Please configure your payment password in config.yaml, such as 123456.
 >
 > The notable feature is that adding to the shopping cart can be successful, but an error is reported as soon as the order settlement page is reached, which is basically the reason!
 
@@ -193,7 +193,7 @@ If you haven't snapped up in two minutes, you basically didn't get it! The progr
 ## self-package executable
 > This method relies on **PyInstaller**, and can also be packaged with other modules
 > Package entry in runserver.py
-1. Modify the Config/config.ini file
+1. Modify the Config/config.yaml file
  ```shell
  [GUI]
  START_USING=TRUE

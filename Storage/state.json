@@ -1,0 +1,14 @@
+{
+    "age":32,
+    "hobby":"football",
+    "name":"james",
+    "skills":{
+        "css":"CSS3",
+        "html":"HTML5",
+        "js":{
+            "bom":"BOM",
+            "dom":"DOM",
+            "ecma":"ECMA7"
+        }
+    }
+}

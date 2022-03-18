@@ -40,17 +40,20 @@
 
 [查看详细日志](./Docs/change-log.md)
 
-### v1.0.1
+### V1.2.0
 
-- 修复了字体和图标显示错误的问题
-- 对本地GUI程序进行了初步配置
-- 对readme以及文档结构进行修改
+- 迁移架构到 `Turbon` *`v1.1.0-beta`*
+- 修复HTTP Server字节丢失问题
+- 更新日志倒叙
 
-### v1.1.0
-- 上线windows开箱即用exe程序
-- 修复windows web ui显示bug
-- 更新readme自行打包方法
+### V1.1.2
 
+感谢 [@consults](https://github.com/consults) 与 [@malavinta](https://github.com/malavinta) 以及 [@uxgnod](https://github.com/uxgnod) 三位小伙伴对本项目的贡献
+
+- 修复ui界面为+8时区
+- 上线 README English Version
+- 修复MacOS系统下图片显示不正常
+- 
 ### v1.1.1
 
 感谢 [@laodiaoyadashu](https://github.com/laodiaoyadashu) 与 [@YuTao0310](https://github.com/YuTao0310) 对本项目的贡献
@@ -60,7 +63,10 @@
 - 去除无用函数，修复错误函数参数
 
 ### 即将到来
+
+- 全面更新UI
 - 上线价格低于设定值自动下单功能
+- 上线秒杀抢购功能
 
 ## 特别声明:
 
@@ -111,7 +117,7 @@ Tips:
 
 1. 推荐 **Chrome** 浏览器
 2. 到 */TEST/area_id/* 目录下查询你所在地的地区标识ID
-3. 如果你的账户有**京豆京券余额**，请到 */Config/config.ini* 设置密码，或者换个账号运行
+3. 如果你的账户有**京豆京券余额**，请到 */Config/config.yaml* 设置密码，或者换个账号运行
 4. 命令行运行服务
 
 ```shell
@@ -132,7 +138,7 @@ python3 runserver.py
 
 #### 2. 网页扫码登录，或者账号密码登录
 
-#### 3. 填写config.ini配置信息
+#### 3. 填写config.yaml配置信息
 
 (1)`eid`和`fp`找个普通商品随便下单,然后抓包就能看到,这两个值可以填固定的
 > 随便找一个商品下单，然后进入结算页面，打开浏览器的调试窗口，切换到控制台Tab页，在控制台中输入变量`_JdTdudfp`，即可从输出的Json中获取`eid`和`fp`。  
@@ -158,12 +164,12 @@ python3 runserver.py
 
 (4)修改抢购件数
 > 代码中默认抢购件数为2
-> 具体修改为：在config.ini文件
+> 具体修改为：在config.yaml文件
 
 (5) **特别提示！** *不止一个人卡在这个问题，如果不注意至少花两个小时调试debug*
 > 如果你的账户中有可用的京券（注意不是东券）或 在上次购买订单中使用了京豆，
 > 那么京东可能会在下单时自动选择京券支付 或 自动勾选京豆支付。
-> 此时下单会要求输入六位数字的支付密码。请在config.ini配置你的支付密码，如 123456 。
+> 此时下单会要求输入六位数字的支付密码。请在config.yaml配置你的支付密码，如 123456 。
 >
 > 显著特点是添加购物车能成功，但一到订单结算页面就报错，基本就是这个原因！
 
@@ -192,7 +198,7 @@ python3 main.py
 ## 自行打包可执行文件
 > 本方法依赖 **PyInstaller**，也可采用其他模块进行打包
 > 打包入口在runserver.py
-1. 修改Config/config.ini文件
+1. 修改Config/config.yaml文件
  ```shell
  [GUI]
  START_USING=TRUE

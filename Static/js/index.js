@@ -36,7 +36,7 @@ new Vue({
         },
         upload() {
             if (!this.checkValid()) return
-            let url = "0.0.0.0:12021/api/jd-shopper"
+            let url = "/api/jd-shopper"
             if (this.mode === "2" || this.mode === 2) {
                 this.date = new Date(this.date.getTime() + 1000 * 60 * 60 * 8)
             }

@@ -1,10 +1,10 @@
 
 
-from Config.settings import config
+from Config import config
 
-PROJECT = config.settings("Information", "PROJECT")
-SERVER_HOST = config.settings("Server", "SERVER_HOST")
-PORT = config.settings("Server", "PORT")
+PROJECT = config.Information.project
+SERVER_HOST = config.Server.server_host
+PORT = config.Server.port
 
 def gui():
     url = "http://{}:{}/".format(SERVER_HOST, PORT)

@@ -4,7 +4,8 @@ import requests
 import os
 import time
 
-from Config.settings import config
+from Config import config
+from Logger import logger
 
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36",
@@ -79,27 +80,27 @@ def wait_some_time():
 
 def send_wechat(message):
     """推送信息到微信"""
-    url = 'http://sc.ftqq.com/{}.send'.format(config.settings('messenger', 'sckey'))
+    url = 'http://sc.ftqq.com/{}.send'.format(config.Message.sckey)
     payload = {
         "text":'抢购结果',
         "desp": message
     }
     headers = {
-        'User-Agent':config.settings('config', 'DEFAULT_USER_AGENT')
+        'User-Agent': get_random_useragent(),
     }
     requests.get(url, params=payload, headers=headers)
 
 
 def response_status(resp):
     if resp.status_code != requests.codes.OK:
-        print('Status: %u, Url: %s' % (resp.status_code, resp.url))
+        logger.info('Status: %u, Url: %s' % (resp.status_code, resp.url))
         return False
     return True
 
 
 def open_image(image_file):
     if os.name == "nt":
-        os.system('start ' + config.path() + '/Static/img/'+ image_file)  # for Windows
+        os.system('start ' + config.path + '/Static/img/'+ image_file)  # for Windows
     else:
         if os.uname()[0] == "Linux":
             if "deepin" in os.uname()[2]:
@@ -111,6 +112,6 @@ def open_image(image_file):
 
 
 def save_image(resp, image_file):
-    with open(config.path() + '/Static/img/' + image_file, 'wb') as f:
+    with open(config.path + '/Static/img/' + image_file, 'wb') as f:
         for chunk in resp.iter_content(chunk_size=1024):
             f.write(chunk)

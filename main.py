@@ -1,5 +1,4 @@
-import sys
-from Config.settings import config
+from Config import config
 from Core.spider import Waiter
 
 if __name__ == '__main__':
@@ -23,5 +22,5 @@ if __name__ == '__main__':
         waiter.waitTimeForSell()
     else:
         print('没有此功能')
-        sys.exit(1)
+        exit()
 

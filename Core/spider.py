@@ -246,7 +246,6 @@ class Waiter():
             resp_json = parse_json(resp_text)
             stock_info = resp_json.get(sku_id)
             sku_state = stock_info.get('skuState')  # 商品是否上架
-            print(stock_info)
             # 商品库存状态：33 -- 现货  0,34 -- 无货  36 -- 采购中  40 -- 可配货
             stock_state = stock_info.get('StockState')
             if sku_state == 1 and stock_state in (33, 40):

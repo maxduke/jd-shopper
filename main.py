@@ -3,7 +3,10 @@ from Core.spider import Waiter
 from runserver import running
 
 if __name__ == '__main__':
-    choiceList = """  
+    DEPEND = config.Depend.open
+    if DEPEND:
+        import Depend
+    choiceList = """
 ===== 注意 =====
 使用前请按要求填写config.ini中的信息
 

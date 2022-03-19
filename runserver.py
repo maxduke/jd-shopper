@@ -1,7 +1,5 @@
+import Depend
 from Config import config
-DEPEND = config.Depend.open
-if DEPEND:
-    import Depend
 from Core import core
 from Logger import logger
 from Scheduler import Scheduler

@@ -97,23 +97,17 @@
 - [Requests](http://docs.python-requests.org/en/master/)
 - [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 - [lxml](https://lxml.de)
+- [pyyaml](https://pyyaml.org)
 
-安装：
+V1.2.1以上版本可以自动检查并安装依赖
 
-```sh
-pip install -r requirements.txt
-```
-
-Tips:
->
-> 如果国内安装第三方库比较慢，可以使用以下指令进行清华源加速：
+> 如果自动安装依赖出错，请挑选以下命令手动安装依赖：
+> 
 > ```sh
-> pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
-> ```
->
-> 如果安装错误也可尝试
-> ```sh
-> pip install requests lxml bs4
+> pip install -r requirements.txt
+> pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+> python3 -m pip install -r requirements.txt
+> pip install lxml pyyaml bs4 requests stora
 > ```
 
 ### *web*界面 - 使用教程

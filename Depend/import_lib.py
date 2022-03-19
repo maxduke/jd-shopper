@@ -1,10 +1,17 @@
 from Depend.load_depend import loadDepend
-from Logger import logger
+
+try:
+    from Logger import logger
+    loggerInfo = logger.info
+    loggerError = logger.error
+except:
+    loggerInfo = print
+    loggerError = print
 
 
-def importLib():
+def importLib(alias=None):
     """Load python dependent libraries dynamically"""
-    logger.info('Load dependent libraries dynamically')
+    loggerInfo('Load dependent libraries dynamically')
 
     libList = loadDepend()
 
@@ -17,14 +24,20 @@ def importLib():
     createVar = locals()
 
     for lib in libList:
-        logger.info(f"{lib['name']} - {lib['version']}")
+        libName = lib['name']
+        version = lib['version']
+        if libName in alias:
+            moduleName = alias[libName]
+        else:
+            moduleName = libName
+        loggerInfo(f'{libName} - {version}')
         try:
-            createVar[lib["name"]] = importlib.import_module(lib["name"])
+            createVar[moduleName] = importlib.import_module(moduleName)
         except Exception as e:
             try:
-                install(f'{lib["name"]}=={lib["version"]}')
-                createVar[lib["name"]] = importlib.import_module(lib["name"])
+                install(f'{libName}=={version}')
+                createVar[moduleName] = importlib.import_module(moduleName)
             except Exception as e:
-                logger.error(e)
+                loggerError(e)
 
-    logger.info('Load libraries complete')
+    loggerInfo('Load libraries complete')

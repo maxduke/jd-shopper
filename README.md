@@ -197,8 +197,12 @@ python3 main.py
 > 打包入口在runserver.py
 1. 修改Config/config.yaml文件
  ```shell
- [GUI]
- START_USING=TRUE
+ # 修改GUI模块
+ GUI:
+    open: true
+ #修改Depend模块
+Depend:
+  open: false
  ```
 2. 安装打包依赖
 ```shell

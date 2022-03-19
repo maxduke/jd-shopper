@@ -4,4 +4,4 @@ bs4==0.0.1
 requests==2.24.0
 stora==0.0.2
 pywebview==3.6.2
-PyInstaller==3.6
+PyInstaller==4.10

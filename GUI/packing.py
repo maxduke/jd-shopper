@@ -10,9 +10,10 @@ def run(*commands):
         os.system(command)
 
 pack = f'pyinstaller --noconfirm --onedir --windowed \
---icon "{PATH}/Docs/img/shopper.png" \
---name "jd-shopper" --add-data "{PATH}/Config;Config/" \
---add-data "{PATH}/cookies;cookies/" \
+--collect-binaries clr_loader \
+--icon "{PATH}/Static/favicon.ico" \
+--name "jd-shopper" \
+--add-data "{PATH}/Config;Config/" \
 --add-data "{PATH}/Core;Core/" \
 --add-data "{PATH}/Docs;Docs/" \
 --add-data "{PATH}/GUI;GUI/" \
@@ -22,6 +23,8 @@ pack = f'pyinstaller --noconfirm --onedir --windowed \
 --add-data "{PATH}/Server;Server/" \
 --add-data "{PATH}/Static;Static/" \
 --add-data "{PATH}/TEST;TEST/"  \
+--add-data "{PATH}/cookies;cookies/" \
+--add-data "{PATH}/requirements.txt;requirements.txt" \
 "{PATH}/runserver.py" \
 '
 

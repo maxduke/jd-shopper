@@ -96,7 +96,7 @@ GUI:
   open: False
 
 Logger: # 日志设置（用于日志系统）
-  file_name: turbon.log # 日志文件名
+  file_name: jd-shopper.log # 日志文件名
   file_path: /Logger/Log_Files/ # 日志文件地址
   count: 1 # 日志文件个数
   max_bytes: 10485760 # 单个日志文件的大小

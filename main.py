@@ -1,11 +1,11 @@
 from Config import config
+DEPEND = config.Depend.open
+if DEPEND:
+    import Depend
 from Core.spider import Waiter
 from runserver import running
 
 if __name__ == '__main__':
-    DEPEND = config.Depend.open
-    if DEPEND:
-        import Depend
     choiceList = """
 ===== 注意 =====
 使用前请按要求填写config.ini中的信息

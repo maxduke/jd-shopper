@@ -1,7 +1,10 @@
+from Config import config
+DEPEND = config.Depend.open
+if DEPEND:
+    import Depend
 from Core import core
 from Logger import logger
 from Scheduler import Scheduler
-from Config import config
 from Server import server
 from threading import Thread
 from GUI.gui import gui
@@ -39,9 +42,6 @@ def server_process(work_count=4):
 
 
 if __name__ == "__main__":
-    DEPEND = config.Depend.open
-    if DEPEND:
-        import Depend
     DEBUG = config.Debug.open
     if DEBUG:
         logger.info("\n===== DEBUG MODE =====")

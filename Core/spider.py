@@ -56,6 +56,7 @@ class Waiter():
 
         self.sku_title = None
         self.init_sku_title()
+        self.stopTag = False
 
     def login_by_qrcode(self):
         """
@@ -199,6 +200,9 @@ class Waiter():
         logger.info("正在等待商品上架：{}".format(
             self.sku_title[:80] + " ......"))
         while True:
+            if self.stopTag:
+                logger.info("已停止查询")
+                break
             if self.get_single_item_stock(sku_id, area_id):
                 logger.info("商品上架: {}".format(
                     self.sku_title[:80] + " ......"))

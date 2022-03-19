@@ -6,11 +6,25 @@
     <link rel="Shortcut Icon" href="favicon.ico" type="./image/x-icon" />
     <link type="text/css" rel="stylesheet" href="./css/element_index.css" />
     <link type="text/css" rel="stylesheet" href="./css/index.css" />
+    <script src="./js/vue.js"></script>
+    <script src="./js/element_index.js"></script>
   </head>
   <body>
     <div id="form_container">
-      <h1>订单自动提交</h1>
-      <textarea v-show="!task" id="log" onpropertychange="this.scrollTop=this.scrollHeight" οnfοcus="this.scrollTop=this.scrollHeight" ></textarea>
+      <h1 class="header">订单自动提交</h1>
+      <textarea
+        v-show="!task" id="log"
+        onpropertychange="this.scrollTop=this.scrollHeight"
+        onfocus="this.scrollTop=this.scrollHeight">
+      </textarea>
+      <div class="stop_container">
+        <el-popconfirm v-show="!task" title="是否退出程序？" @confirm="exit()">
+          <el-button slot="reference" class="stop_button" type="danger">退出程序</el-button>
+        </el-popconfirm>
+        <el-popconfirm v-show="!task" title="是否停止运行？" @confirm="stop()">
+          <el-button slot="reference" class="stop_button" type="primary">停止运行</el-button>
+        </el-popconfirm>
+      </div>
       <el-form v-show="task" ref="form" label-width="80px">
         <el-form-item label="下单模式">
           <el-radio v-model="mode" label="1" @change="buyMode" border
@@ -52,7 +66,7 @@
             label="购买数量"
           ></el-input-number>
         </el-form-item>
-        <el-form-item label="超时时间(秒)">
+        <el-form-item label="超时(秒)">
           <el-input-number
             v-model="timeout"
             :min="1"
@@ -76,7 +90,9 @@
             label="线程数"
           ></el-input-number>
         </el-form-item>
-        <el-button id="add_button" @click="reset()">重置选项</el-button>
+        <el-popconfirm title="确定要重置并删除缓存吗？" @confirm="reset()">
+          <el-button slot="reference" id="add_button">重置选项</el-button>
+        </el-popconfirm>
         <el-button
           id="run_button"
           @click="upload()"
@@ -94,7 +110,7 @@
         </el-dialog>
 
         <el-dialog
-          title="title"
+          title="错误"
           :visible.sync="dialogVisible"
           width="30%">
           <span>{{dialog}}</span>
@@ -107,24 +123,6 @@
       </el-form>
     </div>
   </body>
-  <script src="./js/vue.js"></script>
-  <script src="./js/element_index.js"></script>
   <script src="https://gias.jd.com/js/td.js"></script>
   <script src="./js/index.js"></script>
 </html>
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->
-<!-- // -->

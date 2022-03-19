@@ -18,8 +18,8 @@ Spider:
   random_time: 5
   # 默认UA
   user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
-  # 是否使用随机 useragent，默认为 False
-  random_useragent: False
+  # 是否使用随机 useragent，默认为 True
+  random_useragent: True
   # 多进程数量
   work_count: 1
 
@@ -64,11 +64,11 @@ Message:
 
 
 
-#:============================
-#:============================
-#:===== 以下框架配置请勿动:=====
-#:============================
-#:============================
+#:============================:
+#:============================:
+#:=====:以下框架配置请勿动:======:
+#:============================:
+#:============================:
 
 Information:
   project: Turbon

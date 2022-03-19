@@ -1,5 +1,6 @@
 *.cookies
 qr_code.png
+cookies/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

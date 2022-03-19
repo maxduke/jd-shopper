@@ -1,18 +1,30 @@
 import copy
+import os,signal
 from Config import config
 from Core.spider import Waiter
 from threading import Thread
+
+from Logger import logger
+
+
 class Global(object):
 
     def __init__(self):
         self.waiter = None
         self.login = None
-        self.thread= None
+        self.thread = None
+        self.running = False
 
     def update(self):
         self.login = self.waiter.qrlogin.is_login
 
+    def stop(self):
+        self.waiter.stopTag = True
+        self.running = False
+
+
 glo = Global()
+
 
 def log(request):
     file_path = config.path + config.Logger.file_path + \
@@ -44,22 +56,42 @@ def jdShopper(request):
     timeout = request['timeout']
     if mode == '1':
         glo.waiter = Waiter(skuids=skuids, area=area, eid=eid, fp=fp, count=count,
-                    retry=retry, work_count=work_count, timeout=timeout)
+                            retry=retry, work_count=work_count, timeout=timeout)
         glo.thread = Thread(target=glo.waiter.waitForSell)
         glo.thread.start()
     elif mode == '2':
         date = date.replace("T", " ")
         date = date.replace("Z", "")
         glo.waiter = Waiter(skuids=skuids, area=area, eid=eid, fp=fp, count=count,
-                    retry=retry, work_count=work_count, timeout=timeout, date=date)
+                            retry=retry, work_count=work_count, timeout=timeout, date=date)
         glo.thread = Thread(target=glo.waiter.waitTimeForSell)
         glo.thread.start()
     glo.update()
+    if glo.login:
+        glo.running = True
     return glo.login
+
 
 def loginStatus(request):
     try:
         glo.update()
     except:
         pass
+    if glo.login:
+        glo.running = True
     return glo.login
+
+
+def runningStatus(request):
+    return glo.running
+
+def stopRunning(request):
+    try:
+        glo.stop()
+        return True
+    except:
+        return False
+
+def exitProcess(request):
+    logger.info('结束进程')
+    os.kill(os.getpid(), signal.SIGTERM)

@@ -3,8 +3,10 @@ from Depend.load_depend import loadDepend
 try:
     from Logger import logger
     loggerInfo = logger.info
+    loggerError = logger.error
 except:
     loggerInfo = print
+    loggerError = print
 
 
 def importLib(alias=None):
@@ -36,6 +38,6 @@ def importLib(alias=None):
                 install(f'{libName}=={version}')
                 createVar[moduleName] = importlib.import_module(moduleName)
             except Exception as e:
-                logger.error(e)
+                loggerError(e)
 
     loggerInfo('Load libraries complete')

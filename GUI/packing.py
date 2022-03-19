@@ -10,7 +10,7 @@ def run(*commands):
         os.system(command)
 
 pack = f'pyinstaller --noconfirm --onedir --windowed \
---icon "{PATH}/Static/favicon.ico" \
+--icon "{PATH}/Docs/img/shopper.png" \
 --name "jd-shopper" --add-data "{PATH}/Config;Config/" \
 --add-data "{PATH}/cookies;cookies/" \
 --add-data "{PATH}/Core;Core/" \

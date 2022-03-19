@@ -101,11 +101,14 @@
 
 V1.2.1以上版本可以自动检查并安装依赖
 
-或者手动安装：
-
-```sh
-pip install -r requirements.txt
-```
+> 如果自动安装依赖出错，请挑选以下命令手动安装依赖：
+> 
+> ```sh
+> pip install -r requirements.txt
+> pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+> python3 -m pip install -r requirements.txt
+> pip install lxml pyyaml bs4 requests stora
+> ```
 
 ### *web*界面 - 使用教程
 

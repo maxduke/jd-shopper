@@ -40,11 +40,14 @@
 
 [查看详细日志](./Docs/change-log.md)
 
-### V1.2.0
+### V1.2.1
 
 - 迁移架构到 `Turbon` *`v1.1.0-beta`*
-- 修复HTTP Server字节丢失问题
+- 修复 `HTTP Server` 字节丢失问题
 - 自动检查并安装依赖
+- `UI` 新增退出程序功能
+- `UI` 新增检查运行状态
+- 修复自动检查依赖不生效的问题
 
 ### V1.1.2
 
@@ -53,7 +56,7 @@
 - 修复ui界面为+8时区
 - 上线 README English Version
 - 修复MacOS系统下图片显示不正常
-- 
+
 ### v1.1.1
 
 感谢 [@laodiaoyadashu](https://github.com/laodiaoyadashu) 与 [@YuTao0310](https://github.com/YuTao0310) 对本项目的贡献

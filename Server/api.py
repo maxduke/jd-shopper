@@ -1,5 +1,6 @@
 import copy
-import os,signal
+import os
+import signal
 from Config import config
 from Core.spider import Waiter
 from threading import Thread

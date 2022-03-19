@@ -250,6 +250,7 @@ new Vue({
                 .then(res => {
                 })
             setTimeout(() => {
+                window.destroy()
                 window.location.href = "about:blank"
                 window.close()
             }, 500)

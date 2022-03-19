@@ -81,11 +81,12 @@
 ## 快速开始
 
 ### 通过 *windows程序* 运行
->  [点我直接下载程序压缩包](https://gitee.com/louisyoungx/JD-SHOPPER/attach_files/888014/download/jd-shopper.zip)
+>  [点击通过Gitee下载压缩包(推荐)](https://gitee.com/louisyoungx/JD-SHOPPER/attach_files/1001096/download/jd-shopper.zip)
+> 
+>  [点击通过GitHub下载压缩包](https://github.com/louisyoungx/jd-shopper/releases/download/v1.2.1/jd-shopper.zip)
 1. 到release界面下载jd-shopper.zip包
 2. 解压后在jd-shopper目录找到jd-shopper.exe文件
 3. 点击运行，或者右键生成快捷方式后运行
-> 提示：如果打开后界面空白，可以尝试在浏览器打开[http://localhost:12021/](http://localhost:12021/)
 
 ### 通过 *源代码* 运行
 
@@ -126,13 +127,14 @@ python3 runserver.py
 >
 > ```shell
 > python runserver.py    # Python环境问题所致
+> py runserver.py    # Python环境问题所致
 > ```
 
 5. 浏览器打开 http://localhost:12021/
 
 ### *命令行* - 使用教程
 
-#### 1. 新版的web界面并不稳定，也许命令行更适合
+#### 1. 命令行可自定义各种功能，也许命令行更适合你
 
 #### 2. 网页扫码登录，或者账号密码登录
 
@@ -141,7 +143,7 @@ python3 runserver.py
 (1)`eid`和`fp`找个普通商品随便下单,然后抓包就能看到,这两个值可以填固定的
 > 随便找一个商品下单，然后进入结算页面，打开浏览器的调试窗口，切换到控制台Tab页，在控制台中输入变量`_JdTdudfp`，即可从输出的Json中获取`eid`和`fp`。  
 > 不会的话参考作者3的👉 [使用教程请参看Wiki](https://github.com/tychxn/jd-assistant/wiki/1.-%E4%BA%AC%E4%B8%9C%E6%8A%A2%E8%B4%AD%E5%8A%A9%E6%89%8B%E7%94%A8%E6%B3%95)
-
+>
 > *不会的同学也可以打开`TEST`目录下的`get_eid_fp.html`文件，不过有概率失败*
 
 

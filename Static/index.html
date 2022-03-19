@@ -66,12 +66,12 @@
             label="购买数量"
           ></el-input-number>
         </el-form-item>
-        <el-form-item label="超时(秒)">
+        <el-form-item label="轮询(秒)">
           <el-input-number
             v-model="timeout"
             :min="1"
             :max="1000"
-            label="超时时间"
+            label="查询间隔"
           ></el-input-number>
         </el-form-item>
         <el-form-item label="重试次数">

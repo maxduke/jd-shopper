@@ -1,7 +1,5 @@
+import Depend
 from Config import config
-DEPEND = config.Depend.open
-if DEPEND:
-    import Depend
 from Core.spider import Waiter
 from runserver import running
 

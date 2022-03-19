@@ -81,7 +81,7 @@
 ## 快速开始
 
 ### 通过 *windows程序* 运行
->  [点击通过Gitee下载压缩包(推荐)](https://gitee.com/louisyoungx/JD-SHOPPER/attach_files/1001096/download/jd-shopper.zip)
+>  [点击通过Gitee下载压缩包(推荐)](https://gitee.com/louisyoungx/jd-shopper/attach_files/1001096/download/jd-shopper.zip)
 > 
 >  [点击通过GitHub下载压缩包](https://github.com/louisyoungx/jd-shopper/releases/download/v1.2.1/jd-shopper.zip)
 1. 到release界面下载jd-shopper.zip包

@@ -1,10 +1,15 @@
 from Depend.load_depend import loadDepend
-from Logger import logger
+
+try:
+    from Logger import logger
+    loggerInfo = logger.info
+except:
+    loggerInfo = print
 
 
 def importLib(alias=None):
     """Load python dependent libraries dynamically"""
-    logger.info('Load dependent libraries dynamically')
+    loggerInfo('Load dependent libraries dynamically')
 
     libList = loadDepend()
 
@@ -23,7 +28,7 @@ def importLib(alias=None):
             moduleName = alias[libName]
         else:
             moduleName = libName
-        logger.info(f'{libName} - {version}')
+        loggerInfo(f'{libName} - {version}')
         try:
             createVar[moduleName] = importlib.import_module(moduleName)
         except Exception as e:
@@ -33,4 +38,4 @@ def importLib(alias=None):
             except Exception as e:
                 logger.error(e)
 
-    logger.info('Load libraries complete')
+    loggerInfo('Load libraries complete')

@@ -110,7 +110,7 @@ Tips:
 >
 > 如果安装错误也可尝试
 > ```sh
-> pip install requests lxml bs4
+> pip install requests lxml bs4 pyyaml
 > ```
 
 ### *web*界面 - 使用教程

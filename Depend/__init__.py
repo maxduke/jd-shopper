@@ -1,13 +1,17 @@
 """
 依赖管理模块
 """
-from .import_lib import importLib
-from Config import config
+
+try:
+    from Config import config
+    DEPEND = config.Depend.open
+except:
+    DEPEND = True
 
 alias = {
     'pyyaml': 'yaml',
 }
 
-DEPEND = config.Depend.open
 if DEPEND:
+    from .import_lib import importLib
     importLib(alias)

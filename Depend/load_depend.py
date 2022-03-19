@@ -1,8 +1,14 @@
 import re
-from Config import config
-from Logger import logger
 
-REQUIREMENTS = config.path + config.Depend.path + config.Depend.file
+try:
+    from Config import config
+    from Logger import logger
+    loggerError = logger.error
+    REQUIREMENTS = config.path + config.Depend.path + config.Depend.file
+except:
+    import os
+    loggerError = print
+    REQUIREMENTS = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/requirements.txt"
 
 
 def loadDepend():
@@ -10,7 +16,7 @@ def loadDepend():
         requirements = open(REQUIREMENTS, 'r')
     except:
         err = "Turbon Depend module opened, howerver no found " + REQUIREMENTS
-        logger.error(err)
+        loggerError(err)
         raise Exception(err)
     libs = requirements.readlines()
     libList = []
